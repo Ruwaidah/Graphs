@@ -3,16 +3,11 @@ Simple graph implementation
 """
 from util import Stack, Queue  # These may come in handy
 
-
 class Graph:
 
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
-
     def __init__(self):
         self.vertices = {}  # This is our adjacency list
-
-    def __str__(self):
-        return f"{self.vertices}"
 
     def add_vertex(self, vertex_id):
         """
@@ -39,6 +34,7 @@ class Graph:
             return self.vertices[vertex_id]
         else:
             return None
+            
 
     def bft(self, starting_vertex):
         """
@@ -65,7 +61,7 @@ class Graph:
                     new_path = list(path)
                     new_path.append(next_vert)
                     qq.enqueue(new_path)
-
+        
         pass  # TODO
 
     def dft(self, starting_vertex):
@@ -73,27 +69,9 @@ class Graph:
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        ss = Stack()
-        ss.push([starting_vertex])
-        # Create a set of traversed vertices
-        visited = set()
-        # While stack is not empty:
-        while ss.size() > 0:
-            # pop the last vertex
-            path = ss.pop()
-            # if not visited
-            if path[-1] not in visited:
-                # DO THE THING!!!!!!!
-                print(path[-1])
-                # mark as visited
-                visited.add(path[-1])
-                # push all neightbors
-                for next_vert in self.get_neighbors(path[-1]):
-                    new_path = list(path)
-                    new_path.append(next_vert)
-                    ss.push(new_path)
+        pass  # TODO
 
-    def dft_recursive(self, starting_vertex, visited=None):
+    def dft_recursive(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
@@ -128,12 +106,10 @@ class Graph:
         """
         pass  # TODO
 
-
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
     # https://github.com/LambdaSchool/Graphs/blob/master/objectives/breadth-first-search/img/bfs-visit-order.png
     graph.add_vertex(1)
-    print("graph", graph)
     graph.add_vertex(2)
     graph.add_vertex(3)
     graph.add_vertex(4)
@@ -197,3 +173,4 @@ if __name__ == '__main__':
     '''
     print(graph.dfs(1, 6))
     print(graph.dfs_recursive(1, 6))
+
