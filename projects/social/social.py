@@ -1,5 +1,6 @@
 import random
 from graph import Graph
+from util import Stack, Queue  # These may come in handy
 
 
 class User:
@@ -89,17 +90,32 @@ class SocialGraph:
         """
 
         visited = {}  # Note that this is a dictionary, not a set
-        # !!!! IMPLEMENT ME
-        print(self.friendships)
-        graph = Graph()
-        for id in self.friendships:
-            graph.add_vertex(id)
-        for path in self.friendships:
-            for friend in self.friendships[path]:
-                graph.add_edge(path, friend)
-        for id in self.friendships:
-            if graph.bfs(id, user_id) is not None:
-                visited[id] = graph.bfs(id, user_id)
+        # # !!!! IMPLEMENT ME
+        # print(self.friendships)
+        # graph = Graph()
+        # for id in self.friendships:
+        #     graph.add_vertex(id)
+        # for path in self.friendships:
+        #     for friend in self.friendships[path]:
+        #         graph.add_edge(path, friend)
+        # for id in self.friendships:
+        #     if graph.bfs(id, user_id) is not None:
+        #         visited[id] = graph.bfs(id, user_id)
+        # return visited
+
+        qq = Queue()
+        qq.enqueue([user_id])
+        # Create a set of traversed vertices
+        # While queue is not empty:
+        while qq.size() > 0:
+            path = qq.dequeue()
+            vertex = path[-1]
+            if vertex not in visited:
+                visited[vertex] = path
+                for neighbor in self.friendships[vertex]:
+                    new_path = path.copy()
+                    new_path.append(neighbor)
+                    qq.enqueue(new_path)
         return visited
 
 
