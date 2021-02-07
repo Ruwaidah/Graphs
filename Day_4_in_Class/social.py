@@ -25,12 +25,15 @@ class SocialGraph:
         Creates a bi-directional friendship
         """
         if user_id == friend_id:
+            return False
             print("WARNING: You cannot be friends with yourself")
         elif friend_id in self.friendships[user_id] or user_id in self.friendships[friend_id]:
+            return False
             print("WARNING: Friendship already exists")
         else:
             self.friendships[user_id].add(friend_id)
             self.friendships[friend_id].add(user_id)
+            return True
 
     def add_user(self, name):
         """
@@ -58,6 +61,25 @@ class SocialGraph:
         # Create friendships
         for i in range(0, num_users):
             self.add_user(f"User {i+1}")
+
+        #  New friendship method
+        # Randomly generate friendshipd keepng new rrejecting dupes until we get the number we need (num_users * avg_friendships //2)
+
+        # Keep track of good friendship and collision
+        targe_frienships = num_users * avg_friendships // 2
+        total_frienship = 0
+        collisions = 0
+        while total_frienship < targe_frienships:
+            user_id = random.randint(1, self.last_id)
+            friend_id = random.randint(1, self.last_id)
+
+            if self.add_friendship(user_id, friend_id):
+                total_frienship += 1
+
+            else:
+                collisions += 1
+
+        print(f"Total Collisions : {collisions}")
         # Generate all friendship combinations
         possible_friendships = []
         # Avoid dupes by making sure first number is smaller than second

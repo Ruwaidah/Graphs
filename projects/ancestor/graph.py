@@ -57,7 +57,7 @@ class Graph:
             # if not visited
             if path[-1] not in visited:
                 # DO THE THING!!!!!!!
-                print(path[-1])
+                # print(path[-1])
                 # mark as visited
                 visited.add(path[-1])
                 # enqueue all neightbors
@@ -65,8 +65,6 @@ class Graph:
                     new_path = list(path)
                     new_path.append(next_vert)
                     qq.enqueue(new_path)
-
-        pass  # TODO
 
     def dft(self, starting_vertex):
         """
@@ -84,6 +82,7 @@ class Graph:
             # if not visited
             if path[-1] not in visited:
                 # DO THE THING!!!!!!!
+                print(path)
                 print(path[-1])
                 # mark as visited
                 visited.add(path[-1])
@@ -92,6 +91,12 @@ class Graph:
                     new_path = list(path)
                     new_path.append(next_vert)
                     ss.push(new_path)
+        print("000000000000")
+        if path[-1] == starting_vertex:
+            return -1
+        elif self.get_neighbors(path[0]) is None and path[0] < path[-1]:
+            return path[0]
+        return path[-1]
 
     def dft_recursive(self, starting_vertex, visited=None):
         """
